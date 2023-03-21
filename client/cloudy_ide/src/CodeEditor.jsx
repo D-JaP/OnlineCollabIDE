@@ -4,7 +4,7 @@ import { css } from '@codemirror/lang-css'
 import { html } from '@codemirror/lang-html'
 import * as Y from 'yjs'
 import {EditorState} from "@codemirror/state"
-import {EditorView, keymap} from "@codemirror/view"
+import {EditorView, ViewUpdate} from "@codemirror/view"
 import { basicSetup } from 'codemirror';
 import {githubLight} from '@ddietr/codemirror-themes/github-light'
 import {githubDark} from '@ddietr/codemirror-themes/github-dark'
@@ -48,7 +48,7 @@ function CodeEditor({value, theme, lang, onChange}) {
                     cm_theme,
                     EditorView.updateListener.of(({ state }) => {
                         onChange({ target: { value: state.doc.text?.join("\n") } });
-                    })
+                    }),
                 ]
             }),
             parent: editorRef.current,
@@ -59,14 +59,13 @@ function CodeEditor({value, theme, lang, onChange}) {
         }
     }, [])
 
-    useEffect(() => {
-        if (view.current && view.current.state.doc.toString() !== value) {
-          view.current.dispatch({
-            changes: { from: 0, to: view.current.state.doc.length, insert: "" }
-          });
-        }
-        console.log(value)
-      }, [value]);
+    // useEffect(() => {
+    //     if (view.current && view.current.state.doc.toString() !== value) {
+    //       view.current.dispatch({
+    //         changes: { from: 0, to: view.current.state.doc.length, insert: "" }
+    //       });
+    //     }
+    //   }, [value]);
 
     return <div ref={editorRef} id="editor-container" />;
 
