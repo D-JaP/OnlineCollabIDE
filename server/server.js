@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { validate } = require('./codebase');
 const Codebase = require('./codebase')
 
 
@@ -13,10 +14,15 @@ const io = require('socket.io')(3001,{
 })
 
 io.on("connection",socket =>{
-    socket.on("send-changes", value => {
-        socket.broadcast.emit("receive-changes", value);
+    socket.on("send-changes-html", value => {
+        socket.broadcast.emit("receive-changes-html", value);
     })
-    
+    socket.on("send-changes-css", value => {
+        socket.broadcast.emit("receive-changes-css", value);
+    })
+    socket.on("send-changes-js", value => {
+        socket.broadcast.emit("receive-changes-js", value);
+    })
 })
 
 
