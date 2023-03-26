@@ -8,15 +8,18 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate
+  Navigate,
+  useParams
 } from 'react-router-dom'
 import {v4 as uuidV4} from 'uuid'
 import CodeEditor from './CodeEditor';
+import Editor from './Editor';
 
 
 function App() {
   const [socket, setSocket] = useState()
 
+  
   useEffect(() => {
     const s = io("http://localhost:3001");
     setSocket(s)
@@ -26,68 +29,38 @@ function App() {
   }, [])
   
   
-  const [htmlCode, setHtmlCode] = useState('<div>hello world<div>');
-  const [cssCode, setCssCode] = useState('');
-  const [jsCode, setJsCode] = useState('');
+  const [html, setHtml] = useState();
+  const [css, setCss] = useState();
+  const [js, setJs] = useState();
 
-  useEffect(() => {
-    if (socket == null | htmlCode == null) return 
-    const handler = (value) => {
-      setHtmlCode(value);
-    }
-    socket.on("receive-changes-html", handler);
+  
+  const handleHtmlChange = (value) => {
+    setHtml(value);
+  };
+  
+  const handleCssChange = (value) => {
+    setCss(value);
+  };
 
-    return () => {
-      socket.off("receive-changes-html", handler);
-    }
-  }, [socket,htmlCode])
+  const handleJsChange = (value) => {
+    setJs(value);
+  };
 
-  useEffect(() => {
-    if (socket == null | cssCode == null) return 
-    const handler = (value) => {
-      setCssCode(value);
-    }
-    socket.on("receive-changes-css", handler);
-
-    return () => {
-      socket.off("receive-changes-css", handler);
-    }
-  }, [socket,cssCode])
-
-  useEffect(() => {
-    if (socket == null | jsCode == null) return 
-    const handler = (value) => {
-      setJsCode(value);
-    }
-    socket.on("receive-changes-js", handler);
-
-    return () => {
-      socket.off("receive-changes-js", handler);
-    }
-  }, [socket,jsCode])
-
+  // save code
   // useEffect(() => {
-  //   if (socket== null | htmlCode == null) return 
-  //   socket.emit("send-changes-html",htmlCode)
-  //   console.log("send-data")
+  //   if (socket == null) return
+  //   const save_data = { _id: documentId, data: { html: html, css: css, js: js } }
+  //   const interval = setInterval(() => {
+  //     socket.emit('save-code', save_data)
+  //   }, SAVE_INTERVAL_MS)
+
   //   return () => {
+  //     clearInterval(interval)
   //   }
-  // }, [htmlCode,socket])
+  // }, [html, css, js, socket])
 
-  const onChangeHtml = React.useCallback((event) => {
-    setHtmlCode(event.target.value);
-    socket.emit("send-changes-html", event.target.value);
-  }, [socket]); 
 
-  const onChangeCss = React.useCallback((event) => {
-    setCssCode(event.target.value);
-    socket.emit("send-changes-css", event.target.value);
-  }, [socket]); 
 
-  const onChangeJs = React.useCallback((event) => {
-    setJsCode(event.target.value);
-    socket.emit("send-changes-js", event.target.value);
-  }, [socket]); 
   
 
   return (
@@ -101,17 +74,15 @@ function App() {
             <div className="container">
               <div className="left">
                 <label><i className="fa-brands fa-html5"></i>HTML</label>
-                <textarea id="html-code" onChange={onChangeHtml} value={htmlCode}></textarea>
-
+                <Editor id="html-editor" lan="html" socket={socket} onChange = {handleHtmlChange} value={html}></Editor>
                 <label><i className="fa-brands fa-css3-alt"></i>CSS</label>
-                <textarea id="css-code" onChange={onChangeCss} value={cssCode}></textarea>
-
+                <Editor id="css-editor" lan="css" socket={socket} onChange = {handleCssChange} value={css}></Editor>
                 <label><i className="fa-brands fa-js"></i>JavaScript</label>
-                <textarea id="js-code" onChange={onChangeJs} value={jsCode}></textarea>
+                <Editor id="js-editor" lan="js" socket={socket} onChange = {handleJsChange} value={js}></Editor>
               </div>
               <div className="right">
                 <label><i className="fa-solid fa-play"></i>Output</label>
-                <iframe id="output" srcDoc={htmlCode + "<style>" + cssCode + "</style>" + "<script>" + jsCode + "</script>"}></iframe>
+                <iframe id="output" srcDoc={html+ "<style>" + css + "</style>" + "<script>" + js + "</script>" }></iframe>
               </div>
             </div>
 
