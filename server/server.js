@@ -1,13 +1,11 @@
 const mongoose = require('mongoose');
-const { validate } = require('./codebase');
-const Codebase = require('./codebase')
+const { validate } = require('./models/codebase');
+const Codebase = require('./models/codebase');
+const express = require('express');
 
-console.log("try to connect mongo")
-
-
+// database connect
 mongoose.set("strictQuery", false);
 const url = 'mongodb://127.0.0.1:27017/code_db'
-
 mongoose.connect(url).then(() => {
     console.log("Connected to Database");
 }).catch((err) => {
@@ -106,3 +104,13 @@ async function findOrCreateNewCode(id) {
     
     return Codebase.create({ _id: id, data: defaultValue })
 }
+
+
+// login 
+const app = require("./auth")
+
+app.listen(4000, ()=> {
+    console.log("login server start on port 4000")
+})
+
+
