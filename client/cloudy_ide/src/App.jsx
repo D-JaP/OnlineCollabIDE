@@ -14,6 +14,9 @@ import {
 import {v4 as uuidV4} from 'uuid'
 import CodeEditor from './CodeEditor';
 import Editor from './Editor';
+import { Link } from 'react-router-dom';
+
+
 
 
 function App() {
@@ -71,6 +74,12 @@ function App() {
           element={<Navigate replace to={`/project/${uuidV4()}`} />} />
         <Route path='/project/:id' element={
           <div>
+            <div className="header">
+              <div className="header-right">
+                <Link to="https://codepen.io/signup" className="login-button">Log in</Link>
+                <Link to="https://codepen.io/signup" className="signup-button">Sign up</Link>
+              </div>
+            </div>
             <div className="container">
               <div className="left">
                 <label><i className="fa-brands fa-html5"></i>HTML</label>
@@ -88,11 +97,11 @@ function App() {
 
             {/* <CodeEditor lang="javascript" theme="light" onChange={(e) => setCode(e.target.value)} value={code} /> */}
           </div>
-
-
         } />
       </Routes>
     </Router>
+
+  
   );
 
 }
