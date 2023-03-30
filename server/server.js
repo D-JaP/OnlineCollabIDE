@@ -5,7 +5,7 @@ const express = require('express');
 
 // database connect
 mongoose.set("strictQuery", false);
-const url = 'mongodb://127.0.0.1:27017/code_db'
+const url = 'mongodb+srv://root:root@cloudy.0vdc0vq.mongodb.net/test'
 mongoose.connect(url).then(() => {
     console.log("Connected to Database");
 }).catch((err) => {
