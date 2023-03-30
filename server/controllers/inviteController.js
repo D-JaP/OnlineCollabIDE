@@ -1,11 +1,10 @@
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
-
-exports.inviteFriend = async (req, res, next) => {
-  const { sender, link } = req.body;
+const User = require('../models/users')
+exports.invite = async (req, res, next) => {
+  const { sender, link, receiver } = req.body;
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
-
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
@@ -32,7 +31,7 @@ exports.inviteFriend = async (req, res, next) => {
     // Construct the email message
     const mailOptions = {
         from: process.env.EMAIL_FROM,
-        to: email,
+        to: receiver,
         subject: `${sender} is inviting you to join his project`,
         text: `Please click on this link to join :\n
         ${link}`,
