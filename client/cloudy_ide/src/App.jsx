@@ -15,6 +15,9 @@ import {v4 as uuidV4} from 'uuid'
 import CodeEditor from './CodeEditor';
 import Editor from './Editor';
 import { Link } from 'react-router-dom';
+import {UserLoginRegister} from "./UserLoginRegister";
+import Navbar from './Navbar';
+
 
 
 
@@ -76,8 +79,13 @@ function App() {
           <div>
             <div className="header">
               <div className="header-right">
-                <Link to="https://codepen.io/signup" className="login-button">Log in</Link>
-                <Link to="https://codepen.io/signup" className="signup-button">Sign up</Link>
+                {/* <Link to={"UserLoginRegister"} className="login-button">Log in</Link> */}
+                {/* <Link to="https://codepen.io/signup" className="signup-button">Sign up</Link> */}
+                <Navbar />
+                <Route path='/' element={<UserLoginRegister />}></Route>
+
+      
+
               </div>
             </div>
             <div className="container">
