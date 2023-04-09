@@ -6,7 +6,6 @@ exports.activateAccount = async (req, res) => {
 
   try {
     // verify the token
-    console.log("decode token");
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // find the user by ID in the token payload

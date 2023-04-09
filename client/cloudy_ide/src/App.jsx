@@ -15,10 +15,11 @@ import {v4 as uuidV4} from 'uuid'
 import CodeEditor from './CodeEditor';
 import Editor from './Editor';
 import { Link } from 'react-router-dom';
-import {UserLoginRegister} from "./UserLoginRegister";
+// import {UserLoginRegister} from "./UserLoginRegister";
+import {RegisterForm, LoginForm} from "./popup/UserLoginRegister"
 import Navbar from './Navbar';
-
-
+import LoginPopup from './popup/LoginPopup';
+import ActivateToken from './ActivateToken';
 
 
 
@@ -78,14 +79,16 @@ function App() {
         <Route path='/project/:id' element={
           <div>
             <div className="header">
+              <div className='header-left'>
+                <p className='logo'>
+                  Cloudy Team
+                </p>
+              </div>
+
               <div className="header-right">
                 {/* <Link to={"UserLoginRegister"} className="login-button">Log in</Link> */}
                 {/* <Link to="https://codepen.io/signup" className="signup-button">Sign up</Link> */}
-                <Navbar />
-                <Route path='/' element={<UserLoginRegister />}></Route>
-
-      
-
+                <LoginPopup />
               </div>
             </div>
             <div className="container">
@@ -106,6 +109,10 @@ function App() {
             {/* <CodeEditor lang="javascript" theme="light" onChange={(e) => setCode(e.target.value)} value={code} /> */}
           </div>
         } />
+        <Route path='/activate/:token' element = {
+          <ActivateToken />
+        } />
+
       </Routes>
     </Router>
 

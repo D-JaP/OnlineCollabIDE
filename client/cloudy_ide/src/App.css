@@ -109,3 +109,22 @@ label{
   background: #000;
   height: 30px;
 }
+/* logo */
+.logo {
+  margin-left: 2rem;
+  font-weight: 600;
+  font-size: x-large;
+}
+
+/* header navbar  */
+.header {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-right {
+  display: flex;
+  justify-content:flex-end;
+  margin-right: 2rem;
+}

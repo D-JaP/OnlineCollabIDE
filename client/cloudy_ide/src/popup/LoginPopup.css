@@ -1,0 +1,32 @@
+.nav-bar {
+    display: flex;
+
+}
+
+
+.loggin-button {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    text-decoration: none;
+    margin-right: 1rem;
+}
+
+.popup-container {
+    background-color: black;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    padding: 1rem;
+    border-radius: 10px;
+    transform: translate(-50%,-50%);
+}
+
+.register-button {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    text-decoration: none;
+}

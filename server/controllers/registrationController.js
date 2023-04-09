@@ -56,7 +56,7 @@ exports.register = async (req, res) => {
         }
       });
   
-      res.status(201).json({ message: 'User registered successfully. Please check your email to activate your account.' });
+      res.status(201).json({ message: 'User registered successfully. Please check your email to activate your account. Then login again.' });
     } catch (error) {
       res.status(500).json({ message: error.message });
     }

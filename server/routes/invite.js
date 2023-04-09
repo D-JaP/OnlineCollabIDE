@@ -3,6 +3,6 @@ const { invite } = require('../controllers/inviteController');
 
 const router = express.Router();
 
-router.get('/invite', invite);
+router.post('/invite', invite);
 
 module.exports = router;

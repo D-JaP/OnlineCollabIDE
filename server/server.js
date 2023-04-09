@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { validate } = require('./models/codebase');
 const Codebase = require('./models/codebase');
 const express = require('express');
+const cors = require('cors');
 
 // database connect
 mongoose.set("strictQuery", false);
@@ -108,9 +109,30 @@ async function findOrCreateNewCode(id) {
 
 // login 
 const app = require("./auth")
-
+app.use(cors({
+    // origin: 'http://localhost:3000',
+    // methods: ['GET', 'POST'],
+}))
 app.listen(4000, ()=> {
     console.log("login server start on port 4000")
 })
 
 
+// serve static file
+
+// const path = require('path');
+
+// const port = process.env.PORT || 5000;
+
+// // Serve static files from the React app
+// app.use(express.static(path.join(path.dirname(__dirname), '/client/cloudy_ide/public')));
+
+// // Handles any requests that don't match the above
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(path.dirname(__dirname) + 'client/cloudy_ide/public'));
+// });
+
+// app.listen(port, () => {
+//     console.log(`Server listening on port ${port}`);
+// });
+  
