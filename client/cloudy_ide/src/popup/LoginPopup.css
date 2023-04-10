@@ -30,3 +30,20 @@
     padding: 5px;
     text-decoration: none;
 }
+
+
+.project-drop {
+    background-color: black;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    padding: 2rem;
+    border-radius: 10px;
+    transform: translate(-50%,-50%);
+    text-decoration: none;
+}
+
+.prj-list-link {
+    text-decoration: none;
+    color: white;
+}

@@ -14,6 +14,9 @@ const userSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  codebase_id: [{
+    type: String
+  }]
 });
 
 const User = model('User', userSchema);

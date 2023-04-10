@@ -34,7 +34,6 @@ export default function InviteForm() {
     <form onSubmit={handleSummit} >
         <h2>
         Enter email:
-
         </h2>
 
         { showForm && (<input
@@ -43,7 +42,9 @@ export default function InviteForm() {
             value={email}
             onChange={(event)=>{setEmail(event.target.value)}}
         />)}
+        
         <button type="submit">Send</button>
+        
     </form>
   )
 }

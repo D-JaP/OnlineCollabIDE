@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios'
 import './UserLoginRegister.css'
-import { redirect, useNavigate } from 'react-router-dom'
+import { redirect, useNavigate, useParams } from 'react-router-dom'
 
 
 // define the token variable
@@ -79,7 +79,8 @@ export const LoginForm = () => {
   const [token, setToken] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-
+  const {id} = useParams()
+  
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -95,6 +96,20 @@ export const LoginForm = () => {
       const cookie_name = "jwtToken"
       const cookie_value = response.data.token
       document.cookie = `${cookie_name}=${cookie_value}`
+
+      // add prj to user database
+      const data  = {
+        id : id,
+        email : email
+      }
+
+      const headers = {
+        'Authorization': 'Bearer ' + cookie_value
+      }
+      const response2 = await axios.post("http://localhost:3000/api/v1/user/add", data, {
+        headers:headers
+      })
+
       setMessage("loggin sucessfully, closing after 3 seconds...")
       setTimeout(() => {
         navigate(0, {replace: true}) 
