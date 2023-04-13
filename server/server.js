@@ -113,26 +113,24 @@ app.use(cors({
     // origin: 'http://localhost:3000',
     // methods: ['GET', 'POST'],
 }))
-app.listen(4000, ()=> {
-    console.log("login server start on port 4000")
-})
+
 
 
 // serve static file
 
-// const path = require('path');
+const path = require('path');
 
 // const port = process.env.PORT || 5000;
 
 // // Serve static files from the React app
-// app.use(express.static(path.join(path.dirname(__dirname), '/client/cloudy_ide/public')));
+app.use(express.static(path.join(path.dirname(__dirname), '/client/cloudy_ide/build')));
 
-// // Handles any requests that don't match the above
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(path.dirname(__dirname) + 'client/cloudy_ide/public'));
-// });
+// Handles any requests that don't match the above
+app.get('*', (req, res) => {
+  res.sendFile(path.join(path.dirname(__dirname) + '/client/cloudy_ide/build/index.html'));
+});
+app.listen(3000, ()=> {
+    console.log("login server start on port 3000")
+})
 
-// app.listen(port, () => {
-//     console.log(`Server listening on port ${port}`);
-// });
   
