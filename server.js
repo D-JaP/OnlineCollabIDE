@@ -35,7 +35,7 @@ app.use(express.static(path.join(path.dirname(__dirname), '/build')));
 console.log(path.join(path.dirname(__dirname), '/build'))
 // Handles any requests that don't match the above
 app.get('*', (req, res) => {
-  res.sendFile(path.join(path.dirname(__dirname) + '/build/index.html'));
+  res.sendFile(path.join(path.dirname(__dirname) + 'app/build/index.html'));
 });
 const server = app.listen(process.env.PORT, ()=> {
     console.log("login server start on port 8080")
