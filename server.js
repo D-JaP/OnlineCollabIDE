@@ -38,7 +38,7 @@ app.use(express.static(path.join(path.dirname(__dirname), '/cloudy/build')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(path.dirname(__dirname) + '/cloudy/build/index.html'));
 });
-const server = app.listen(8080, ()=> {
+const server = app.listen(80, ()=> {
     console.log("login server start on port 8080")
 })
 
