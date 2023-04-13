@@ -28,7 +28,7 @@ function App() {
 
   
   useEffect(() => {
-    const s = io("http://localhost:3001");
+    const s = io();
     setSocket(s)
     return () => {
       s.disconnect();

@@ -9,7 +9,7 @@ function ActivateToken() {
     useEffect(() => {
         async function activateAccount() {
             try {
-                const response = await axios.post("http://localhost:3000/api/v1/activate/" + token,)
+                const response = await axios.post("/api/v1/activate/" + token,)
                 if (response.status === 200) {
                     console.log(response.data.message)
                     setMessage(response.data.message)

@@ -17,7 +17,7 @@ export default function InviteForm() {
         const headers = {
             'Authorization': 'Bearer ' + jwtCookie
         }
-        const response = await axios.post('http://localhost:3000/api/v1/invite',
+        const response = await axios.post('/api/v1/invite',
             req_body,
             {
                 headers: headers

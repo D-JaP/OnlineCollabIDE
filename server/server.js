@@ -16,12 +16,38 @@ mongoose.connect(url).then(() => {
 const defaultValue = { html: "", css: "", js: "" }
 const lan = ["html","css","js"]
 
-const io = require('socket.io')(3001, {
-    cors: {
-        origin: 'http://localhost:3000',
-        methods: ['GET', 'POST'],
-    },
+// login 
+const app = require("./auth")
+app.use(cors({
+    // origin: 'http://localhost:3000',
+    // methods: ['GET', 'POST'],
+}))
+
+
+
+// serve static file
+
+const path = require('path');
+
+// const port = process.env.PORT || 5000;
+
+// // Serve static files from the React app
+app.use(express.static(path.join(path.dirname(__dirname), '/server/build')));
+
+// Handles any requests that don't match the above
+app.get('*', (req, res) => {
+  res.sendFile(path.join(path.dirname(__dirname) + '/server/build/index.html'));
+});
+const server = app.listen(3000, ()=> {
+    console.log("login server start on port 3000")
 })
+
+  
+
+
+
+const io = require('socket.io')(server)
+
 io.on("connection", socket => {
     socket.on("get-code-html", async codeId => {
         const loaded_data = await findOrCreateNewCode(codeId)
@@ -107,30 +133,3 @@ async function findOrCreateNewCode(id) {
 }
 
 
-// login 
-const app = require("./auth")
-app.use(cors({
-    // origin: 'http://localhost:3000',
-    // methods: ['GET', 'POST'],
-}))
-
-
-
-// serve static file
-
-const path = require('path');
-
-// const port = process.env.PORT || 5000;
-
-// // Serve static files from the React app
-app.use(express.static(path.join(path.dirname(__dirname), '/server/build')));
-
-// Handles any requests that don't match the above
-app.get('*', (req, res) => {
-  res.sendFile(path.join(path.dirname(__dirname) + '/server/build/index.html'));
-});
-app.listen(3000, ()=> {
-    console.log("login server start on port 3000")
-})
-
-  

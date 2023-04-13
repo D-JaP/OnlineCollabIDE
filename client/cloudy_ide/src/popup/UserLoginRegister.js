@@ -25,7 +25,7 @@ export const RegisterForm = () => {
 
     try {
       //Handle response data
-      const response = await axios.post("http://localhost:3000/api/v1/registration", user);
+      const response = await axios.post("/api/v1/registration", user);
       setMessage(response.data.message)
       setShowForm(false)
 

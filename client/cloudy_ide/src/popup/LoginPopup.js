@@ -39,14 +39,14 @@ function LoginPopup() {
         async function authenticateJwt() {
             try {
 
-                const response = await axios.post("http://localhost:3000/api/v1/auth", {}, { headers: headers })
+                const response = await axios.post("/api/v1/auth", {}, { headers: headers })
 
                 if (response.status === 200) {
                     setLoggedState(true)
                     setEmail(response.data.email)
 
                 }
-                const response2 = await axios.get("http://localhost:3000/api/v1/user", { headers: headers })
+                const response2 = await axios.get("/api/v1/user", { headers: headers })
                 let ids = []
                 response2.data.forEach((link) => {
                     const link_split = link.split('/')
