@@ -32,11 +32,11 @@ const path = require('path');
 // const port = process.env.PORT || 5000;
 
 // // Serve static files from the React app
-app.use(express.static(path.join(path.dirname(__dirname), '/build')));
+app.use(express.static(path.join(path.dirname(__dirname), '/dist/cloudy-vic-1/build')));
 
 // Handles any requests that don't match the above
 app.get('*', (req, res) => {
-  res.sendFile(path.join(path.dirname(__dirname) + '/build/index.html'));
+  res.sendFile(path.join(path.dirname(__dirname) + '/dist/cloudy-vic-1/build/index.html'));
 });
 const server = app.listen(process.env.PORT, ()=> {
     console.log("login server start on port 8080")
