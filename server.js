@@ -31,7 +31,7 @@ const path = require('path');
 
 // const port = process.env.PORT || 5000;
 // // Serve static files from the React app
-app.use(express.static(path.join(path.dirname(__dirname), '/build')));
+app.use(express.static(path.join(path.dirname(__dirname), ' app/build')));
 console.log(path.join(path.dirname(__dirname), '/build'))
 // Handles any requests that don't match the above
 app.get('*', (req, res) => {
