@@ -30,14 +30,12 @@ app.use(cors({
 const path = require('path');
 
 // const port = process.env.PORT || 5000;
-console.log(path.dirname(__filename)
-)
 // // Serve static files from the React app
-app.use(express.static(path.join(path.dirname(__dirname), '/dist/cloudy-vic-1/build')));
-
+app.use(express.static(path.join(path.dirname(__dirname), '/build')));
+console.log(path.join(path.dirname(__dirname), '/build'))
 // Handles any requests that don't match the above
 app.get('*', (req, res) => {
-  res.sendFile(path.join(path.dirname(__dirname) + '/dist/cloudy-vic-1/build/index.html'));
+  res.sendFile(path.join(path.dirname(__dirname) + '/build/index.html'));
 });
 const server = app.listen(process.env.PORT, ()=> {
     console.log("login server start on port 8080")
