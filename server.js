@@ -30,7 +30,7 @@ app.use(cors({
 const path = require('path');
 
 // const port = process.env.PORT || 5000;
-
+console.log(__dirname)
 // // Serve static files from the React app
 app.use(express.static(path.join(path.dirname(__dirname), '/dist/cloudy-vic-1/build')));
 
