@@ -28,7 +28,7 @@ function Editor(props) {
     console.log("load"+ props.lan)
     if (!loaded){
       socket.once("load-code-" + props.lan, loaded_data => {
-        console.log("loading...");
+        console.log("loading...1");
         if (loaded_data.length == 0 ) return
         console.log("load-code-"+props.lan,loaded_data);
         setLoaded(true)
