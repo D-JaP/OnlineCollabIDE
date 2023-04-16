@@ -50,13 +50,18 @@ const io = require('socket.io')(server)
 
 io.on("connection", socket => {
     socket.on("get-code-html", async codeId => {
+        console.log("get-code-html")
         const loaded_data = await findOrCreateNewCode(codeId)
         const {data: _code,_id} = loaded_data
         socket.join(codeId)
 
-        lan.forEach(lan => {
-            socket.emit("load-code-" + lan, {client_id: "server", code: _code[lan],_id})
-        });
+        socket.emit("load-code-html", {client_id: "server", code: _code['html'],_id})
+        console.log("load-code-html")
+
+        // lan.forEach(lan => {
+        //     socket.emit("load-code-" + lan, {client_id: "server", code: _code[lan],_id})
+        //     console.log("load-code-"+lan)
+        // });
 
 
 
@@ -68,12 +73,13 @@ io.on("connection", socket => {
     })
 
     // get code css
-    socket.on("get-code-css", codeId => {
+    socket.on("get-code-css", async codeId => {
         console.log("get-code-css")
-        // const data = await findOrCreateNewCode(codeId)
-        const data = ""
+        const loaded_data = await findOrCreateNewCode(codeId)
+        const {data: _code,_id} = loaded_data
         socket.join(codeId)
-        socket.emit("load-code-css", data)
+        socket.emit("load-code-css", {client_id: "server", code: _code['css'],_id})
+        console.log("load-code-css")
 
         const sendChangeCssHandler = (data) => {
             socket.broadcast.to(codeId).emit("receive-changes-css", data);
@@ -84,13 +90,14 @@ io.on("connection", socket => {
     })
     
     // get code js
-    socket.on("get-code-js", codeId => {
+    socket.on("get-code-js", async codeId => {
         console.log("get-code-js")
-        // const data = await findOrCreateNewCode(codeId)
-        const data = ""
+        const loaded_data = await findOrCreateNewCode(codeId)
+        const {data: _code,_id} = loaded_data
         socket.join(codeId)
-        socket.emit("load-code-js", data)
 
+        socket.emit("load-code-js", {client_id: "server", code: _code['js'],_id})
+        console.log("load-code-js")
         const sendChangeJsHandler = (data) => {
             socket.broadcast.to(codeId).emit("receive-changes-js", data);
             socket.removeAllListeners("send-changes-js", sendChangeJsHandler);
