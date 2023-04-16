@@ -75,6 +75,7 @@ function Editor(props) {
     }
     setCodeData(data);
     props.onChange(event.target.value);
+    console.log(event.target.value);
     socket.emit("send-changes-" + props.lan, data);
     setCurrentSaveData({type: "enqueue", payload: data})
 
