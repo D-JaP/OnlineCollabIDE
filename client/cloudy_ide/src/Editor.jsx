@@ -25,6 +25,7 @@ function Editor(props) {
   // load data
   useEffect(() => {
     if (socket == null || codedata == null ||documentId==null) return
+    console.log("load"+ props.lan)
     if (!loaded){
       socket.once("load-code-" + props.lan, loaded_data => {
         console.log("loading...");
@@ -41,12 +42,12 @@ function Editor(props) {
     // only emit when u are the modifying
     if (codedata.client_id == socket.id){
       socket.emit("get-code-" + props.lan, documentId)
-      console.log("get-code");
+      console.log("get-code" + props.lan);
     }
     return () => {
 
     }
-  }, [socket,codedata, documentId])
+  }, [socket,codedata, documentId,loaded])
 
 
   // receiver
