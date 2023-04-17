@@ -65,6 +65,7 @@ io.on("connection", socket => {
 
         const sendChangeHtmlHandler = (data) => {
             socket.broadcast.to(codeId).emit("receive-changes-html", data);
+            console.log("receive-changes-html", data)
             socket.removeAllListeners("send-changes-html", sendChangeHtmlHandler);
         }
         socket.on("send-changes-html", sendChangeHtmlHandler)

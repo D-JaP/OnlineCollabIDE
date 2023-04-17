@@ -55,7 +55,6 @@ function Editor(props) {
     const handler = (data) => {
       setCodeData(data);
       props.onChange(data.code);
-
       console.log(data)
     }
     
