@@ -32,18 +32,32 @@ export default function InviteForm() {
 
     return (
     <form onSubmit={handleSummit} >
-        <h2>
-        Enter email:
-        </h2>
+        {
+            showForm && (<h2>
+                Enter email:
+                </h2>)
+        }
+        
+        {
+            !showForm && (<h3>
+                Invitation sent
+                </h3>)
+        }
+        
 
-        { showForm && (<input
+        { showForm && (
+        <input
             type='email'
             placeholder='Enter email to invite'
             value={email}
             onChange={(event)=>{setEmail(event.target.value)}}
-        />)}
+        />
+        )
+        }
+        {
+            showForm && (<button type="submit">Send</button>)
+        }
         
-        <button type="submit">Send</button>
         
     </form>
   )
