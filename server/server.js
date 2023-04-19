@@ -15,7 +15,8 @@ mongoose.connect(url).then(() => {
 
 const defaultValue = { html: "", css: "", js: "" }
 const lan = ["html","css","js"]
-
+var first_load = true;
+const timeOut = (secs) => new Promise((res) => setTimeout(res, secs * 1000));
 const io = require('socket.io')(3001, {
     cors: {
         origin: 'http://localhost:3000',
@@ -48,7 +49,10 @@ io.on("connection", socket => {
 
     // get code css
     socket.on("get-code-css", async codeId => {
-        console.log("get-code-css")
+        console.log("get-code-css") 
+        if (first_load ==true){
+            await timeOut(0.5)
+        }
         const loaded_data = await findOrCreateNewCode(codeId)
         const {data: _code,_id} = loaded_data
         socket.join(codeId)
@@ -66,6 +70,10 @@ io.on("connection", socket => {
     // get code js
     socket.on("get-code-js", async codeId => {
         console.log("get-code-js")
+        if (first_load ==true){
+            await timeOut(0.5)
+            first_load=false
+        }
         const loaded_data = await findOrCreateNewCode(codeId)
         const {data: _code,_id} = loaded_data
         socket.join(codeId)
@@ -108,9 +116,10 @@ async function findOrCreateNewCode(id) {
 
     const codebase = await Codebase.findById(id)
     // console.log("codebase" ,codebase)
-    if (codebase) return codebase
-    
-    return Codebase.create({ _id: id, data: defaultValue })
+    if (codebase != null) return codebase
+    else {
+        return Codebase.create({ _id: id, data: defaultValue })
+    }
 }
 
 
@@ -143,3 +152,5 @@ app.listen(4000, ()=> {
 //     console.log(`Server listening on port ${port}`);
 // });
   
+
+module.exports = app;
