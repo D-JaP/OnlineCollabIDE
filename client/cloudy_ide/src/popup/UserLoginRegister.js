@@ -90,7 +90,7 @@ export const LoginForm = () => {
     };
 
     try {
-      const response = await axios.post("http://localhost:3000/api/v1/login", credentials);
+      const response = await axios.post("/api/v1/login", credentials);
       setToken(response.data.token);
       // save to cookie
       const cookie_name = "jwtToken"
@@ -106,7 +106,7 @@ export const LoginForm = () => {
       const headers = {
         'Authorization': 'Bearer ' + cookie_value
       }
-      const response2 = await axios.post("http://localhost:3000/api/v1/user/add", data, {
+      const response2 = await axios.post("/api/v1/user/add", data, {
         headers:headers
       })
 
