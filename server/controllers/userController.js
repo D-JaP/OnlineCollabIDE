@@ -53,7 +53,7 @@ exports.addPrjToUser = async (req,res,next) => {
             });
         }
         
-        if (!user.codebase_id.find((e) => e === req.id)) {
+        if (!user.codebase_id.find((e) => e === req.body.id)) {
             user.codebase_id.push(req.body.id)
             await user.save();
             

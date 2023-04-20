@@ -12,7 +12,6 @@ import {
   useParams
 } from 'react-router-dom'
 import {v4 as uuidV4} from 'uuid'
-import CodeEditor from './CodeEditor';
 import Editor from './Editor';
 import { Link } from 'react-router-dom';
 // import {UserLoginRegister} from "./UserLoginRegister";
