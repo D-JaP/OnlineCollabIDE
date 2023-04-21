@@ -69,7 +69,7 @@ function LoginPopup() {
 
     const logout = (event) => {
         event.preventDefault()
-        Cookies.remove('jwtToken', { path: '' })
+        Cookies.remove('jwtToken')
         navigate(0, { replace: true })
     };
 
