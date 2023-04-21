@@ -63,7 +63,7 @@ describe('Backend API',  function() {
     it('auth', function(done) {
         token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDMyMDIzMTA2ODQyY2M3ZTA1MDBhNDgiLCJpYXQiOjE2ODEwNTcyNjZ9.4gs7A8l9gYcQnOSTNA58NFZx5TniLTZ1BqBW8EVzwds"
         request(app)
-          .get('/api/v1/auth')
+          .post('/api/v1/auth')
           .set('Authorization', 'Bearer ' + token)
           .expect(200)
           .end(function(err, res) {
