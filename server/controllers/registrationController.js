@@ -45,7 +45,7 @@ exports.register = async (req, res) => {
         to: email,
         subject: 'Activate your account',
         text: `Please click on this link to activate your account:\n
-        http://${process.env.CLIENT_URL}/activate/${token}`,
+        https://${process.env.CLIENT_URL}/activate/${token}`,
       };
   
       transporter.sendMail(mailOptions, (error, info) => {

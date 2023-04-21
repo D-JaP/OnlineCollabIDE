@@ -19,7 +19,7 @@ exports.user = async (req, res, next) => {
         const prj_list_id = user.codebase_id;
         let prj_list_link = []
         prj_list_id.forEach((id) => {
-            prj_list_link.push('http://localhost:3000/project/' + id)
+            prj_list_link.push(`https://${process.env.CLIENT_URL}/project/` + id)
         })
         if (prj_list_link) {
             return res.status(200).json(prj_list_link)
